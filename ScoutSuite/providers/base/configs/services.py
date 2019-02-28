@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from opinel.utils.console import printError, printException, printDebug
-from opinel.utils.aws import get_aws_account_id, get_partition_name
+from ScoutSuite.core.console import print_error, print_exception, print_debug
+from ScoutSuite.providers.aws.aws import get_partition_name
 
 class BaseServicesConfig(object):
 
@@ -11,7 +11,7 @@ class BaseServicesConfig(object):
     def _is_provider(self, provider_name):
         return False
 
-    def fetch(self, credentials, services=None, regions=None):
+    async def fetch(self, credentials, services=None, regions=None):
         services = [] if services is None else services
         regions = [] if regions is None else regions
         for service in vars(self):
@@ -30,14 +30,14 @@ class BaseServicesConfig(object):
                         if service != 'iam':
                             method_args['partition_name'] = get_partition_name(credentials)
 
-                    service_config.fetch_all(**method_args)
+                    await service_config.fetch_all(**method_args)
                     if hasattr(service_config, 'finalize'):
-                        service_config.finalize()
+                        await service_config.finalize()
                 else:
-                    printDebug('No method to fetch service %s.' % service)
+                    print_debug('No method to fetch service %s.' % service)
             except Exception as e:
-                printError('Error: could not fetch %s configuration.' % service)
-                printException(e)
+                print_error('Error: could not fetch %s configuration.' % service)
+                print_exception(e)
 
     # TODO is this ever called?
     # def postprocessing(self):

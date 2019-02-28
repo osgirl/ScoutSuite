@@ -135,10 +135,6 @@ ul.no-bullet {
     pointer-events: none;
     cursor: default;
 }
-.active a{
-    text-decoration: none;
-    color: black;
-}
 
 .dropdown-submenu {
     position: relative;
@@ -305,6 +301,10 @@ input:checked + .slider:before {
 
 #last_run {
     width: 100%;
+}
+
+.list-group {
+    margin-bottom: 1em;
 }
 
 #double-column-left .list-group {

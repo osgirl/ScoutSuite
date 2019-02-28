@@ -7,8 +7,7 @@ import json
 import sys
 import copy
 
-from opinel.utils.console import printException, printInfo
-from opinel.utils.globals import manage_dictionary
+from ScoutSuite.core.console import print_exception, print_info
 
 from ScoutSuite import __version__ as scout2_version
 from ScoutSuite.providers.base.configs.browser import get_object_at
@@ -78,7 +77,7 @@ class BaseProvider(object):
         self._update_metadata()
         self._update_last_run(current_time, ruleset)
 
-    def fetch(self, regions=None, skipped_regions=None, partition_name=None):
+    async def fetch(self, regions=None, skipped_regions=None, partition_name=None):
         """
         Fetch resources for each service
 
@@ -92,7 +91,7 @@ class BaseProvider(object):
         regions = [] if regions is None else regions
         skipped_regions = [] if skipped_regions is None else skipped_regions
         # TODO: determine partition name based on regions and warn if multiple partitions...
-        self.services.fetch(self.credentials, self.service_list, regions)
+        await self.services.fetch(self.credentials, self.service_list, regions)
 
         # TODO implement this properly
         """
@@ -186,7 +185,7 @@ class BaseProvider(object):
                                 self.metadata[service_group][service]['resources'][resource]['count'] = \
                                     service_config[count]
                             except Exception as e:
-                                printException(e)
+                                print_exception(e)
                     else:
                         self.metadata[service_group][service]['resources'][resource]['count'] = len(service_config['regions'])
 
@@ -334,11 +333,11 @@ class BaseProvider(object):
                                                callback_args)
 
         except Exception as e:
-            printException(e)
-            printInfo('Path: %s' % str(current_path))
-            printInfo('Key = %s' % str(key) if 'key' in locals() else 'not defined')
-            printInfo('Value = %s' % str(value) if 'value' in locals() else 'not defined')
-            printInfo('Path = %s' % path)
+            print_exception(e)
+            print_info('Path: %s' % str(current_path))
+            print_info('Key = %s' % str(key) if 'key' in locals() else 'not defined')
+            print_info('Value = %s' % str(value) if 'value' in locals() else 'not defined')
+            print_info('Path = %s' % path)
 
     def _new_go_to_and_do(self, current_config, path, current_path, callbacks):
         """
@@ -389,8 +388,8 @@ class BaseProvider(object):
                             tmp.append(i)
                             self._new_go_to_and_do(current_config[key][i], copy.deepcopy(path), tmp, callbacks)
         except Exception as e:
-            printException(e)
-            printInfo('Path: %s' % str(current_path))
-            printInfo('Key = %s' % str(key) if 'key' in locals() else 'not defined')
-            printInfo('Value = %s' % str(value) if 'value' in locals() else 'not defined')
-            printInfo('Path = %s' % path)
+            print_exception(e)
+            print_info('Path: %s' % str(current_path))
+            print_info('Key = %s' % str(key) if 'key' in locals() else 'not defined')
+            print_info('Value = %s' % str(value) if 'value' in locals() else 'not defined')
+            print_info('Path = %s' % path)
