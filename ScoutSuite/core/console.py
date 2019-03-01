@@ -123,7 +123,8 @@ def prompt_overwrite(filename, force_write, test_input=None):
     """
     if not os.path.exists(filename) or force_write:
         return True
-    return prompt_yes_no('File \'{}\' already exists. Do you want to overwrite it'.format(filename), test_input=test_input)
+    return prompt_yes_no('File \'{}\' already exists. Do you want to overwrite it'.format(filename),
+                         test_input=test_input)
 
 
 def prompt_value(question, choices=None, default=None, display_choices=True, display_indices=False,
@@ -132,6 +133,7 @@ def prompt_value(question, choices=None, default=None, display_choices=True, dis
     """
     Prompt for a value
                                         .                    .
+    :param return_index:
     :param question:                    Question to be asked
     :param choices:                     List of authorized answers
     :param default:                     Value suggested by default
