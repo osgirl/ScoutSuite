@@ -146,7 +146,8 @@ def prompt_value(question, choices=None, default=None, display_choices=True, dis
     :param regex:                       TODO
     :param regex_format                 TODO
     :param max_laps:                    Exit after N laps
-    :param test_input:                       Used for unit testing
+    :param test_input:                  Used for unit testing
+    :param return_index                 TODO
 
     :return:
     """

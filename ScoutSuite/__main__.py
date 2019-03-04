@@ -165,7 +165,7 @@ def generate_report_name(provider_code, args):
     report_file_name = {}
     if provider_code == 'aws':
         if args.get('profile'):
-            report_file_name = 'aws-%s' % args.get('profile')[0]
+            report_file_name = 'aws-%s' % args.get('profile')
         else:
             report_file_name = 'aws'
     if provider_code == 'gcp':
