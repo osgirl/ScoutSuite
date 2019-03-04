@@ -6,6 +6,7 @@ import os
 
 from ScoutSuite import DEFAULT_REPORT_DIR
 
+
 class ScoutSuiteArgumentParser:
 
     def __init__(self):
@@ -40,11 +41,6 @@ class ScoutSuiteArgumentParser:
                             default=[default_profile],
                             nargs='+',
                             help='Name of the profile. Defaults to %(default)s' + default_profile_origin)
-        parser.add_argument('-c',
-                            '--csv-credentials',
-                            dest='csv_credentials',
-                            default=None,
-                            help='Path to a CSV file containing the access key ID and secret key')
         parser.add_argument('--mfa-serial',
                             dest='mfa_serial',
                             default=None,
